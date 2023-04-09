@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css"
+    />
+  </head>
+  <body>
+    <header class="w-100  bg-img">
+      <br /><br /><br /><br /><br /><br /><br />
+      <nav
+        class="d-flex justify-content-between bg-white container w-75 vh-6 align-items-center">
+        <div class="d-flex flex-row gap-5">
+          <p class="film">
+            <strong
+              ><a class="text-decoration-none text-black" href=""
+                >Film <i class="bi bi-chevron-down"></i></a
+            ></strong>
+            <span class="zzz d-none d-flex flex-row gap-5">
+              <span class="d-flex flex-column dispNone flex-wrap gap-1"> </span>
+            </span>
+          </p>
+          <p class="serial">
+            <strong
+              ><a class="text-decoration-none text-black" href=""
+                >Serial <i class="bi bi-chevron-down"></i></a
+            ></strong>
+            <span class="zzz d-none d-flex flex-row gap-5">
+              <span class="d-flex flex-column"> </span>
+            </span>
+          </p>
+          <p class="cizgifilm">
+            <strong
+              ><a class="text-decoration-none text-black" href=""
+                >Cizgi Film <i class="bi bi-chevron-down"></i></a
+            ></strong>
+            <span class="zzz d-none d-flex flex-row gap-5">
+              <span class="d-flex flex-column"> </span>
+            </span>
+          </p>
+          <p class="komedi">
+            <strong
+              ><a class="text-decoration-none text-black" href=""
+                >Komediya <i class="bi bi-chevron-down"></i></a
+            ></strong>
+          </p>
+        </div>
+        <div class="">
+          <input placeholder="Film" type="text" />
+        </div>
+      
+
+        </div>
+      </nav>
+  <!-- repo-------------------------- -->
+      <div class="d-flex flex-column gap-3 w-75 h-100 bg-white container newdd">
+        <div class="d-flex newdd-1 gap-5 flex-row ">
+        </div>
+      </div>
+    </header>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+      const newData = document.querySelector(".newdd")
+      const ss = document.querySelector(".ss")
+      let id = document.location.search.slice(4)
+      console.log(id);
+
+    //   $.ajax({
+    //     method: "GET",
+    //     url: "https://api.tvmaze.com/shows" + id
+    //   }).done(function (data) {
+    //     console.log(data);
+    //    ss.innerHTML= `
+    //         <h1>${data.name}</h1>
+
+    //         `
+    //   })
+
+   axios.get("https://api.tvmaze.com/shows/"+id).then(element=>{
+    newData.innerHTML=`
+      <div class="d-flex gap-5 flex-row ">
+           <div class="d-flex flex-column gap-3" >
+                <h3 ><b>${element.data.name}</b></h3>
+                <img style="width: 12rem; " src="${element.data.image.medium}" alt="">
+               
+                <a href="${element.data.officialSite}"> <button class="btn btn-info"><i class="bi bi-play-circle-fill p-lg-3 fs-4"></i>Show Tv</button></a>
+                </div>
+            <div class="d-flex flex-row gap-5">
+            <div class="d-flex flex-column gap-2 pt-5">
+                <p ><b>Ratings:</b></p>
+                <p><b>release date:</b></p>
+                <p><b>A country:</b></p>
+                <p><b>Director:</b></p>
+                <p><b>Genre:</b></p>
+                <p><b>As:</b></p>
+                <p><b>Time:</b></p>
+            </div>
+            <div>
+            <p class="pt-5">${element.data.rating.average}</p>
+            <p class="">${element.data.premiered}</p>
+            <p class="">${element.data.language}</p>
+            <p class="">${element.data.type}</p>
+            <p class="">${element.data.genres}</p>
+            <p class="">${element.data.type}</p>
+            <p class="">${element.data.schedule.time}</p>
+            <p class="">${element.data.language}</p>
+        </div>
+        </div>
+        
+        </div>
+        <div style="width: 18cm; height: 8cm; margin-top: 15px;" >
+            <h5>What is the movie<b class="fs-4"> ${element.data.name}</b> about?:</h5>
+            <p ">${element.data.summary}</p>
+        
+        </div> 
+`
+})
+    </script>
+    
+  </body>
+</html>
